@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->foreignId('id_clinique')->constrained('cliniques');
+            $table->foreignId('id_patient')->constrained('patients');
             $table->timestamps();
         });
     }
