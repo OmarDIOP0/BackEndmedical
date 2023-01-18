@@ -12,4 +12,19 @@ class Clinique extends Model
         'name',
         'lieu',
     ];
+
+    public function medecin()
+    {
+        return $this->hasMany(Medecin::class);
+    }
+
+    public function consultation()
+    {
+        return $this->hasMany(Consultation::class);
+    }
+
+    public function specialisation()
+    {
+        return $this->hasMany(Specialisation::class);
+    }
 }

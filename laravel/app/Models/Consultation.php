@@ -13,4 +13,9 @@ class Consultation extends Model
         'id_clinique',
         'id_patient'
     ];
+
+    public function patient()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

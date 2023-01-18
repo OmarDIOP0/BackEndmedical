@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -23,41 +26,16 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function register(Request $request)
-    {
-        $validation=$request->validate([
-            'name'=>'required|min:4|string',
-            'email'=>'required|unique:users|email',
-            'password'=>'required|min:8|string'
-        ]);
-    if($validation){
-        $user=User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            //'password'=>Hash::make($request->password)
-            'password'=>$request->password
-          ]);
-          console.log($user);
-         return response()->json([
-            'user'=>$user
-         ]);
-         return true;
-    }
-    else {
-        return redirect()->back()->with('msg', 'Mot de passe incorrect');
-    }
 
-    }
-
-    public function login()
+    public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Non autorisé'], 401);
         }
-
         return $this->respondWithToken($token);
+
     }
 
     /**

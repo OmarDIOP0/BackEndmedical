@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinique;
 use Illuminate\Http\Request;
 
 class CliniqueController extends Controller
@@ -21,9 +22,16 @@ class CliniqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $clinique=Clinique::create([
+            'name'=>$request->name,
+            'lieu'=>$request->lieu
+        ]);
+        return response()->json([
+            'status'=>'success',
+            'clinique'=>$clinique
+        ]);
     }
 
     /**

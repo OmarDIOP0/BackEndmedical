@@ -14,4 +14,9 @@ class Medecin extends Model
         'password',
         'id_clinique'
     ];
+
+    public function clinique()
+    {
+        return $this->belongsTo(Clinique::class);
+    }
 }
